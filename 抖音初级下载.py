@@ -26,6 +26,9 @@ driver.implicitly_wait(10)
 # 屏 幕 滑 动 从（200,500）滑到（200,100）
 driver.swipe(200,500,200,100)
 
+time.sleep(5)
+
+
 # 点 击“分享按钮”
 driver.find_element_by_id('com.ss.android.ugc.aweme:id/cgz').click()
 time.sleep(2)
