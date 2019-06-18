@@ -12,13 +12,16 @@ for i in list_all:
     l = f.read()
     text_json = json.loads(l)
     for i in range(5):
-        titm_t = int(time.time())
-        title = str(titm_t)+ ".mp4"
-        hre = text_json['aweme_list'][0]['video']['play_addr']['url_list'][0]
-        f = open(title,'ab')
-        cont = requests.get(hre)
-        f.write(cont.content)
-        f.close()
+        try:
+            titm_t = int(time.time())
+            title = str(titm_t)+ ".mp4"
+            hre = text_json['aweme_list'][0]['video']['play_addr']['url_list'][0]
+            f = open(title,'ab')
+            cont = requests.get(hre)
+            f.write(cont.content)
+            f.close()
+        except:
+            continue
 
 
 
