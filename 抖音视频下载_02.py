@@ -15,9 +15,9 @@ headers={"User-Agent" : "Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.9.
 #            }
 
 # 组 装 地 址
-list_all = os.listdir('D:\\LT\\pyproj\\l1')
+list_all = os.listdir('D:\\LT\\pyproj\\python_app\\json_text')
 print(list_all)
-source = "D:\\LT\\pyproj\\l1\\"
+source = "D:\\LT\\pyproj\\python_app\\json_text\\"
 
 #  json  文  件 读  取  循  环
 for i in list_all:
