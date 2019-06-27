@@ -1,5 +1,6 @@
 
 # ------------------------------------------------------------------------------------
+# 本操作手机为 魅蓝 2
 # 简 单 功 能 ： 打 开 抖 音 ， 然 后 保 存 视 频 到 本 地
 # 需 要 提 前 开 启 appium 服 务 ，打 开 appium 程 序 即 可
 # 可 以 保 存 到 本 地 （已 注 释 掉，因 为 有 水 印 ）
@@ -31,22 +32,8 @@ for i in range(10):
     # 隐 式 等 待 10 秒
 
     # 屏 幕 滑 动 从（200,500）滑到（200,100）
-    driver.swipe(200,500,200,100)
+    driver.swipe(200,1000,200,300)
     # 强 制 休 息 5 秒
     time.sleep(5)
 
-
-#  保 存 视 频 方 法 01 下 载 到 本 地 ， 有 水 印
-
-# # 点 击“分享按钮”
-# driver.find_element_by_id('com.ss.android.ugc.aweme:id/cgz').click()
-# time.sleep(2)
-#
-# # 点 击“保存到本地”
-# driver.find_element_by_xpath('/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.View/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.FrameLayout[1]/android.widget.HorizontalScrollView/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.FrameLayout/android.widget.ImageView').click()
-
-# 等 待 下 载 完 毕
-# time.sleep(60)
-
-# 退 出 app
 driver.quit()
