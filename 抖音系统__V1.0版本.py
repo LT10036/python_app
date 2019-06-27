@@ -28,22 +28,24 @@ desired_caps['noReset'] = 'True'
 driver = webdriver.Remote('http://127.0.0.1:4723/wd/hub', desired_caps)
 
 # 上 滑 一 下
-time.sleep(2)
-driver.swipe(300,800,300,100)
-driver.find_element_by_xpath('//android.widget.ImageView[@content-desc="搜索"]').click()
+for i in range(2):
+    time.sleep(2)
+    driver.swipe(300,800,300,100)
+# 点 击 搜 索   id 及 xpath 不 好 使 ，不 如 直 接 点 击
+driver.tap([(987,132)],100)
 # 定 义 操 作 指 令
 
 
 def s_anchor (driver):
     n_name = input('请输入想要关注的主播官方昵称：')
     time.sleep(2)
-    driver.find_element_by_id('com.ss.android.ugc.aweme:id/a8d').click()
+    driver.tap([(400,120)],100)
     time.sleep(1)
     driver.find_element_by_id('com.ss.android.ugc.aweme:id/a8d').send_keys(n_name)
     time.sleep(2)
-    driver.find_element_by_id('com.ss.android.ugc.aweme:id/d6m').click()
+    driver.tap([(984,130)],100)
     try:
-        driver.find_element_by_id('com.ss.android.ugc.aweme:id/n2').click()
+        driver.tap([(900,600)],100)
         print("已关注主播%d"%n_name)
     except:
         print("此账号主播未找到，请确认名字是否正确，已返回主菜单")
@@ -54,12 +56,12 @@ def s_target(driver):
     n_name = input('请输入想要寻找的品类：')
 
     time.sleep(2)
-    driver.find_element_by_id('com.ss.android.ugc.aweme:id/a8d').click()
+    driver.tap([(400,120)],100)
     time.sleep(1)
     driver.find_element_by_id('com.ss.android.ugc.aweme:id/a8d').send_keys(n_name)
     time.sleep(2)
     # 点击搜索
-    driver.find_element_by_id('com.ss.android.ugc.aweme:id/d6m').click()
+    driver.tap([(984,130)],100)
     num = input("请输入要浏览多少个视频")
     try:
         num = int(num)
@@ -74,15 +76,15 @@ def s_target(driver):
 def d_video(driver):
     n_name = input('请输入想要下载的主播官方昵称：')
     time.sleep(3)
-    driver.find_element_by_id('com.ss.android.ugc.aweme:id/a8d').click()
+    driver.tap([(400,120)],100)
     time.sleep(1)
     driver.find_element_by_id('com.ss.android.ugc.aweme:id/a8d').send_keys(n_name)
     time.sleep(2)
     # 点击搜索
-    driver.find_element_by_id('com.ss.android.ugc.aweme:id/d6m').click()
+    driver.tap([(984,130)],100)
     time.sleep(5)
     # 进入主页
-    driver.find_element_by_id('com.ss.android.ugc.aweme:id/d9j').click()
+    driver.tap([(387,530)],100)
     num = input("请输入想要保存多少页的视频，按回车键结束")
     try:
         num = int(num)
@@ -94,17 +96,17 @@ def d_video(driver):
     except:
         print("请输入正确数字，本次操作无效，即将返回主菜单，请按提示操作")
 def G_up(drover):
-    n_name = input('请输入想要下载的主播官方昵称：')
+    n_name = input('请输入想要点赞和评论视频的主播官方昵称：')
     time.sleep(3)
-    driver.find_element_by_id('com.ss.android.ugc.aweme:id/a8d').click()
+    driver.tap([(400,120)],100)
     time.sleep(1)
     driver.find_element_by_id('com.ss.android.ugc.aweme:id/a8d').send_keys(n_name)
     time.sleep(2)
     # 点击搜索
-    driver.find_element_by_id('com.ss.android.ugc.aweme:id/d6m').click()
-    time.sleep(5)
+    driver.tap([(984,130)],100)
+    time.sleep(2)
     # 进入主页
-    driver.find_element_by_id('com.ss.android.ugc.aweme:id/d9j').click()
+    driver.tap([(387,530)],100)
 
     #  按 坐 标 点 击 第一  个 置 顶 视 频
     time.sleep(2)
@@ -131,11 +133,43 @@ def G_up(drover):
     except:
         print("请输入合法数字，本次操作无效，即将返回主菜单，请按照操作提示")
 
-
+def foll_Fans(driver):
+    # 寻找某个主播的粉丝
+    n_name = input("请先输入要找的主播名字:")
+    driver.tap([(987,132)],100)
+    time.sleep(3)
+    driver.tap([(400,120)],100)
+    time.sleep(1)
+    driver.find_element_by_id('com.ss.android.ugc.aweme:id/a8d').send_keys(n_name)
+    time.sleep(2)
+    # 点击搜索
+    driver.tap([(984,130)],100)
+    time.sleep(5)
+    # 进入主页
+    driver.tap([(387,530)],100)
+    time.sleep(4)
+    # 进入粉丝列表页面
+    driver.tap([(800,1310)],100)
+    time.sleep(2)
+    num = input("请输入想要关注前几页的该主播粉丝:")
+    num = int(num)
+    driver.swipe(600,656,600,410)
+    for r in range(num):
+        c=328
+        n = 328
+        for i in range(7):
+            driver.tap([(900,n)],100)
+            n = n + 228
+            time.sleep(1)
+        n = c
+        driver.swipe(600,1810,600,210)
+    driver.tap([(80,130)],100)
+    time.sleep(2)
+    driver.tap([(80,130)],100)
 
 while True:
 
-    l=input("请输入    搜索主播请输入： 1   搜索品类商品请输入： 2   下载主播视频 ： 3       评论主播视频及点赞请输入： 4       结束请输入 ：0")
+    l=input("请输入    搜索主播请输入： 1   搜索品类商品请输入： 2   下载主播视频 ： 3       评论主播视频及点赞请输入： 4     批量添加某个主播的粉丝为关注请输入 ： 5     结束请输入 ：0")
 
     try:
         l = int(l)
@@ -146,13 +180,16 @@ while True:
         print("已关注，如想继续关注其他请安指令操作")
     elif l == 2:
         s_target(driver)
-        print('如想搜索其他商品，请按指令操作')
+        print('视频链接已保存，如想搜索其他商品，请按指令操作')
     elif l == 3:
         d_video(driver)
-        print('如想下载其他主播视频，请按指令操作')
+        print('视频链接已保存，如想下载其他主播视频，请按指令操作')
     elif l == 4:
         d_video(driver)
         print('如想点赞评论其他主播视频，请按指令操作')
+    elif l == 5:
+        foll_Fans(driver)
+        print('添加粉丝为关注已完成，请按指令操作')
     elif l == 0:
         driver.quit()
         break
