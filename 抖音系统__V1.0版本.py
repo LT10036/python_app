@@ -93,6 +93,7 @@ def d_video(driver):
             driver.swipe(300, 1200, 300, 300)
         print("已保存前%d页面视频链接，讲会返回主菜单，请按提示操作" % num)
         driver.tap([(80,130),100])
+        driver.tap([(987,132)],100)
     except:
         print("请输入正确数字，本次操作无效，即将返回主菜单，请按提示操作")
 def G_up(drover):
@@ -129,7 +130,6 @@ def G_up(drover):
             time.sleep(2)
             driver.swipe(300, 1200, 300, 200)
             print("完成一次点赞和评论，继续中")
-        print("点赞评论结束，即将返回主菜单，请按操作提示")
     except:
         print("请输入合法数字，本次操作无效，即将返回主菜单，请按照操作提示")
 
@@ -151,7 +151,7 @@ def foll_Fans(driver):
     # 进入粉丝列表页面
     driver.tap([(800,1310)],100)
     time.sleep(2)
-    num = input("请输入想要关注前几页的该主播粉丝:")
+    num = input("请输入想要关注前几页的粉丝:")
     num = int(num)
     driver.swipe(600,656,600,410)
     for r in range(num):
@@ -166,11 +166,49 @@ def foll_Fans(driver):
     driver.tap([(80,130)],100)
     time.sleep(2)
     driver.tap([(80,130)],100)
-
+def foll_anchor(driver):
+    # 寻找某个主播的关注
+    n_name = input("请先输入要找的主播名字:")
+    driver.tap([(987,132)],100)
+    time.sleep(3)
+    driver.tap([(400,120)],100)
+    time.sleep(1)
+    driver.find_element_by_id('com.ss.android.ugc.aweme:id/a8d').send_keys(n_name)
+    time.sleep(2)
+    # 点击搜索
+    driver.tap([(984,130)],100)
+    time.sleep(5)
+    # 进入主页
+    driver.tap([(387,530)],100)
+    time.sleep(4)
+    # 进入粉丝列表页面
+    driver.tap([(500,1318)],100)
+    time.sleep(2)
+    num = input("请输入想要关注前几页的该主播:")
+    num = int(num)
+    for r in range(num):
+        c=328
+        n_n = 328
+        for i in range(7):
+            driver.tap([(900,n)],100)
+            n = n + 228
+            time.sleep(1)
+        n_n = c
+        driver.swipe(600,1810,600,210)
+    driver.tap([(80,130)],100)
+    time.sleep(2)
+    driver.tap([(80,130)],100)
 while True:
+    print("请 按 需 求 输 入 对 应 数 字")
+    print('想 要 添 加 某 主 播 未 关 注 请 输 入 ： 1 ')
+    print('搜 索 品 类 商 品 请 输 入 ： 2 ')
+    print('下 载 主 播 视 频 ： 3  ')
+    print('评 论 主 播 视 频 及 点 赞 请 输 入： 4 ')
+    print('批 量 添 加 某 个 主 播 的 粉 丝 为 关 注 请 输 入  ： 5 ')
+    print('添 加 某 个 主 播 的 关 注 对 选 哪 个 为 关 注 请 输 入 ： 6 ')
+    print('退 出 请 按 ： 0 ')
 
-    l=input("请输入    搜索主播请输入： 1   搜索品类商品请输入： 2   下载主播视频 ： 3       评论主播视频及点赞请输入： 4     批量添加某个主播的粉丝为关注请输入 ： 5     结束请输入 ：0")
-
+    l=input()
     try:
         l = int(l)
     except:
@@ -178,18 +216,27 @@ while True:
     if l == 1:
         s_anchor(driver)
         print("已关注，如想继续关注其他请安指令操作")
+        time.sleep(5)
     elif l == 2:
         s_target(driver)
-        print('视频链接已保存，如想搜索其他商品，请按指令操作')
+        print('浏览的视频链接已保存，如想搜索其他商品，请按指令操作')
+        time.sleep(5)
     elif l == 3:
         d_video(driver)
-        print('视频链接已保存，如想下载其他主播视频，请按指令操作')
+        print('主播视频链接已保存，如想下载其他主播视频，请按指令操作')
+        time.sleep(5)
     elif l == 4:
-        d_video(driver)
-        print('如想点赞评论其他主播视频，请按指令操作')
+        G_up(driver)
+        print('如想继续评论其他主播视频，请按指令操作')
+        time.sleep(5)
     elif l == 5:
         foll_Fans(driver)
         print('添加粉丝为关注已完成，请按指令操作')
+        time.sleep(5)
+    elif l == 6:
+        foll_anchor(driver)
+        print('添加主播关注对象为关注已完成，请按指令操作')
+        time.sleep(5)
     elif l == 0:
         driver.quit()
         break

@@ -18,8 +18,8 @@ driver = webdriver.Remote('http://127.0.0.1:4723/wd/hub', desired_caps)
 for i in range(2):
     time.sleep(1)
     driver.swipe(300,1200,300,300)
-def foll_Fans(driver):
-    # 寻找某个主播的粉丝
+def foll_anchor(driver):
+    # 寻找某个主播的关注
     n_name = input("请先输入要找的主播名字:")
     driver.tap([(987,132)],100)
     time.sleep(3)
@@ -34,19 +34,18 @@ def foll_Fans(driver):
     driver.tap([(387,530)],100)
     time.sleep(4)
     # 进入粉丝列表页面
-    driver.tap([(800,1310)],100)
+    driver.tap([(500,1318)],100)
     time.sleep(2)
-    num = input("请输入想要关注前几页的该主播粉丝:")
+    num = input("请输入想要关注前几页的该主播:")
     num = int(num)
-    driver.swipe(600,656,600,410)
     for r in range(num):
         c=328
-        n = 328
+        n_n = 328
         for i in range(7):
             driver.tap([(900,n)],100)
             n = n + 228
             time.sleep(1)
-        n = c
+        n_n = c
         driver.swipe(600,1810,600,210)
     driver.tap([(80,130)],100)
     time.sleep(2)
