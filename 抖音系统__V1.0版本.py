@@ -38,31 +38,30 @@ for i in range(2):
 # 点 击 搜 索   id 及 xpath 不 好 使 ，不 如 直 接 点 击
 driver.tap([(987,132)],100)
 # 定 义 操 作 指 令
-
+time.sleep(2)
+driver.tap([(400, 120)], 100)
 
 def s_anchor (driver):
     n_name = input('请输入想要关注的主播官方昵称：')
-    time.sleep(2)
-    driver.tap([(400,120)],100)
     time.sleep(1)
-    driver.find_element_by_id('com.ss.android.ugc.aweme:id/a8d').send_keys(n_name)
+    driver.find_element_by_id('com.ss.android.ugc.aweme:id/a9d').send_keys(n_name)
     time.sleep(2)
     driver.tap([(984,130)],100)
     try:
         driver.tap([(900,600)],100)
-        print("已关注主播%d"%n_name)
+        print("已关注主播%d"%(n_name))
+        # 返 回 搜 索 框
+        time.sleep(1)
+        driver.tap([(80, 130)], 100)
     except:
-        print("此账号主播未找到，请确认名字是否正确，已返回主菜单")
+        print(" ")
 
 
 
 def s_target(driver):
     n_name = input('请输入想要寻找的品类：')
-
-    time.sleep(2)
-    driver.tap([(400,120)],100)
     time.sleep(1)
-    driver.find_element_by_id('com.ss.android.ugc.aweme:id/a8d').send_keys(n_name)
+    driver.find_element_by_id('com.ss.android.ugc.aweme:id/a9d').send_keys(n_name)
     time.sleep(2)
     # 点击搜索
     driver.tap([(984,130)],100)
@@ -73,16 +72,17 @@ def s_target(driver):
             time.sleep(1)
             driver.swipe(300, 1200, 300, 300)
         print("已保存前30个商品视频链接,将要返回主菜单，请按提示操作")
+        # 返 回 搜 索 框
+        time.sleep(1)
+        driver.tap([(80, 130)], 100)
     except:
-        print("请输入合法数字，本次操作无效，即将返回主菜单，请按提示操作")
+        print(" ")
 
 
 def d_video(driver):
     n_name = input('请输入想要下载的主播官方昵称：')
-    time.sleep(3)
-    driver.tap([(400,120)],100)
     time.sleep(1)
-    driver.find_element_by_id('com.ss.android.ugc.aweme:id/a8d').send_keys(n_name)
+    driver.find_element_by_id('com.ss.android.ugc.aweme:id/a9d').send_keys(n_name)
     time.sleep(2)
     # 点击搜索
     driver.tap([(984,130)],100)
@@ -94,18 +94,17 @@ def d_video(driver):
         num = int(num)
         for i in range(num):
             time.sleep(1)
-            driver.swipe(300, 1200, 300, 300)
+            driver.swipe(300, 1700, 300, 300)
         print("已保存前%d页面视频链接，讲会返回主菜单，请按提示操作" % num)
+        time.sleep(3)
+        # 返 回 搜 索 框
         driver.tap([(80,130),100])
-        driver.tap([(987,132)],100)
     except:
-        print("请输入正确数字，本次操作无效，即将返回主菜单，请按提示操作")
+        print(" ")
 def G_up(drover):
     n_name = input('请输入想要点赞和评论视频的主播官方昵称：')
-    time.sleep(3)
-    driver.tap([(400,120)],100)
     time.sleep(1)
-    driver.find_element_by_id('com.ss.android.ugc.aweme:id/a8d').send_keys(n_name)
+    driver.find_element_by_id('com.ss.android.ugc.aweme:id/a9d').send_keys(n_name)
     time.sleep(2)
     # 点击搜索
     driver.tap([(984,130)],100)
@@ -132,19 +131,23 @@ def G_up(drover):
             time.sleep(1)
             driver.find_element_by_id('com.ss.android.ugc.aweme:id/tq').click()
             time.sleep(2)
-            driver.swipe(300, 1200, 300, 200)
+            driver.swipe(300, 1600, 300, 200)
             print("完成一次点赞和评论，继续中")
+         # 返 回 搜 索 框
+        time.sleep(1)
+        driver.tap([(80, 130)], 100)
+        time.sleep(1)
+        driver.tap([(80, 130)], 100)
+        time.sleep(1)
+        driver.tap([(80, 130)], 100)
     except:
-        print("请输入合法数字，本次操作无效，即将返回主菜单，请按照操作提示")
+        print(" ")
 
 def foll_Fans(driver):
     # 寻找某个主播的粉丝
-    n_name = input("请先输入要找的主播名字:")
-    driver.tap([(987,132)],100)
-    time.sleep(3)
-    driver.tap([(400,120)],100)
+    n_name = input("请先输入想添加他的粉丝为关注的主播名字:")
     time.sleep(1)
-    driver.find_element_by_id('com.ss.android.ugc.aweme:id/a8d').send_keys(n_name)
+    driver.find_element_by_id('com.ss.android.ugc.aweme:id/a9d').send_keys(n_name)
     time.sleep(2)
     # 点击搜索
     driver.tap([(984,130)],100)
@@ -167,17 +170,17 @@ def foll_Fans(driver):
             time.sleep(1)
         n = c
         driver.swipe(600,1810,600,210)
+    # 返 回 搜 索 框
+    driver.tap([(80,130)],100)
+    time.sleep(2)
     driver.tap([(80,130)],100)
     time.sleep(2)
     driver.tap([(80,130)],100)
 def foll_anchor(driver):
     # 寻找某个主播的关注
     n_name = input("请先输入要找的主播名字:")
-    driver.tap([(987,132)],100)
-    time.sleep(3)
-    driver.tap([(400,120)],100)
     time.sleep(1)
-    driver.find_element_by_id('com.ss.android.ugc.aweme:id/a8d').send_keys(n_name)
+    driver.find_element_by_id('com.ss.android.ugc.aweme:id/a9d').send_keys(n_name)
     time.sleep(2)
     # 点击搜索
     driver.tap([(984,130)],100)
@@ -199,16 +202,16 @@ def foll_anchor(driver):
             time.sleep(1)
         n_n = c
         driver.swipe(600,1810,600,210)
+    # 返 回 搜 索 框
     driver.tap([(80,130)],100)
     time.sleep(2)
     driver.tap([(80,130)],100)
+    time.sleep(2)
+    driver.tap([(80, 130)], 100)
 def P_letter(driver):
     # 输 入 要 私 信 的 主 播 完 整 名 字
     n_name = input("请先输入要私信的主播名字：")
     con = input("请输入要发送的私信内容：")
-    driver.tap([(987,132)],100)
-    time.sleep(3)
-    driver.tap([(400,120)],100)
     time.sleep(2)
     driver.find_element_by_id('com.ss.android.ugc.aweme:id/a9d').send_keys(n_name)
     time.sleep(2)
