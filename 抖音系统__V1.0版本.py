@@ -5,7 +5,11 @@
 #  按 2 进入 搜索品类
 #  按 3 进入 主播视频下载
 #  按 4 进入 主播视频点赞并评论，评论已写死，可改文本读取
+#  按 5 进入 批量添加某个主播的粉丝
+#  按 6 进入 批量添加某个主播关注的人为关注
+#  按 7 进入 私信主播
 #  按 0 退出
+#  使 用 前 注 意 修 改 搜 索 框 send_keys 的 id ，经 常 会 变
 # -------------------------------------------------------------------------
 
 from appium import webdriver
@@ -198,6 +202,39 @@ def foll_anchor(driver):
     driver.tap([(80,130)],100)
     time.sleep(2)
     driver.tap([(80,130)],100)
+def P_letter(driver):
+    # 输 入 要 私 信 的 主 播 完 整 名 字
+    n_name = input("请先输入要私信的主播名字：")
+    con = input("请输入要发送的私信内容：")
+    driver.tap([(987,132)],100)
+    time.sleep(3)
+    driver.tap([(400,120)],100)
+    time.sleep(2)
+    driver.find_element_by_id('com.ss.android.ugc.aweme:id/a9d').send_keys(n_name)
+    time.sleep(2)
+    # 点击搜索
+    driver.tap([(984,130)],100)
+    time.sleep(5)
+    # 进入主页
+    try:
+        driver.tap([(387,530)],100)
+        time.sleep(4)
+        # 点 击 发 送 私 信
+        driver.tap([(840,470)],100)
+        time.sleep(3)
+        driver.tap([(300,1820)],100)
+        driver.find_element_by_id('com.ss.android.ugc.aweme:id/bio').send_keys(con)
+        time.sleep(2)
+        # 点 击 发 送 按 钮
+        driver.tap([(1000, 1010)], 100)
+        # 连 点 三 次 回 到 主 页 面
+        driver.tap([(80, 130)], 100)
+        time.sleep(1)
+        driver.tap([(80, 130)], 100)
+        time.sleep(1)
+        driver.tap([(80, 130)], 100)
+    except:
+        print("只能给已关注的主播发送私信,即将返回主菜单，请按操作提示进行操作")
 while True:
     print("请 按 需 求 输 入 对 应 数 字")
     print('想 要 添 加 某 主 播 未 关 注 请 输 入 ： 1 ')
@@ -206,6 +243,7 @@ while True:
     print('评 论 主 播 视 频 及 点 赞 请 输 入： 4 ')
     print('批 量 添 加 某 个 主 播 的 粉 丝 为 关 注 请 输 入  ： 5 ')
     print('添 加 某 个 主 播 的 关 注 对 选 哪 个 为 关 注 请 输 入 ： 6 ')
+    print('私 信 主 播 请 输 入 ： 7')
     print('退 出 请 按 ： 0 ')
 
     l=input()
@@ -237,6 +275,11 @@ while True:
         foll_anchor(driver)
         print('添加主播关注对象为关注已完成，请按指令操作')
         time.sleep(5)
+    elif l == 7:
+        P_letter(driver)
+        print('私信该主播已完成，请按指令操作')
+        time.sleep(5)
+
     elif l == 0:
         driver.quit()
         break
