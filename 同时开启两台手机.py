@@ -3,42 +3,66 @@
 # 本操作手机为  魅蓝 2
 # 同 时 打 开 两 台 手 机 上 的  app
 # ----------------------------------------------------------------------------------
-
+import threading
 from appium import webdriver
+import time
+
+
+
+def P_S(driver):
+    for i in range(10):
+        driver.swipe(200,1700,200,300)
+        time.sleep(3)
+    print("我跑完了，等你哦")
+    driver.quit()
+
+
+
+
+
+
+
+
+
+
+
 
 # app 参 数 ：系统，版本，包名，入口名，设备码，不重复安装appium settings
 # 第 一 个 手 机
+l=['JJUC7L8T99999999','88AKDMH22BEC']
+
 desired_caps = {}
+desired_caps['deviceName']='JJUC7L8T99999999'
+desired_caps['udid']='JJUC7L8T99999999'
 desired_caps['platformName'] = 'Android'
 desired_caps['platformVersion'] = '5.1'
 desired_caps['appPackage'] = 'com.ss.android.ugc.aweme'
 desired_caps['appActivity'] = 'com.ss.android.ugc.aweme.main.MainActivity'
-desired_caps['deviceName'] = '88MFDMG3AVLH'
-# 一 定 添 加 这 个 ， 不然 会 无 法 打 开 某 一 个 手 机 ， 指 定 启 动的 设 备 码
-desired_caps['udid'] = '88MFDMG3AVLH'
 desired_caps['automationName'] = 'UiAutomator2'
+desired_caps['noReset'] = 'True'
 
-# 第 二 个 手 机
-desired_caps2 = {}
-desired_caps2['platformName'] = 'Android'
-desired_caps2['platformVersion'] = '5.1'
-desired_caps2['appPackage'] = 'com.ss.android.ugc.aweme'
-desired_caps2['appActivity'] = 'com.ss.android.ugc.aweme.main.MainActivity'
-desired_caps2['deviceName'] = '88AKDMH22BEC'
-# 一 定 添 加 这 个 ， 不 然 会 无 法 打 开 某 一 个 手 机 ， 指 定 启 动 的 设 备 码
-desired_caps2['udid'] = '88AKDMH22BEC'
-desired_caps2['automationName'] = 'UiAutomator2'
+desired_caps1 = {}
+desired_caps1['deviceName']='SGSWD6CQH66SBEFI'
+desired_caps1['udid']='SGSWD6CQH66SBEFI'
+desired_caps1['platformName'] = 'Android'
+desired_caps1['platformVersion'] = '5.1'
+desired_caps1['appPackage'] = 'com.ss.android.ugc.aweme'
+desired_caps1['appActivity'] = 'com.ss.android.ugc.aweme.main.MainActivity'
+desired_caps1['automationName'] = 'UiAutomator2'
+desired_caps1['noReset'] = 'True'
 
-
-# 开 始 运 行
 driver = webdriver.Remote('http://127.0.0.1:4723/wd/hub', desired_caps)
-driver2 = webdriver.Remote('http://127.0.0.1:4723/wd/hub', desired_caps2)
+driver2 = webdriver.Remote('http://127.0.0.1:4723/wd/hub', desired_caps1)
 
-# 隐 式 等 待 10 秒
-driver.implicitly_wait(10)
-driver2.implicitly_wait(10)
-
-
-# 屏 幕 滑 动 从（200,500）滑到（200,100）
-driver.swipe(200,500,200,100)
-driver2.swipe(200,500,200,100)
+t = threading.Thread(target=P_S,args=(driver,))
+t.start()
+t2 = threading.Thread(target=P_S,args=(driver2,))
+t2.start()
+print("。。。。。。。。都开始跑了。。。。。。。")
+while True:
+    l = threading.active_count()
+    if  l==1:
+        break
+    else:
+        time.sleep(3)
+print("...............都跑完了..................")
