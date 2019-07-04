@@ -10,6 +10,7 @@ import time
 
 
 def P_S(driver):
+    print("我开始跑了哦。。。。。。。。。。。。。。。。。。。")
     for i in range(10):
         driver.swipe(200,1700,200,300)
         time.sleep(3)
